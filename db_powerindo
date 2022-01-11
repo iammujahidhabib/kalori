@@ -1,0 +1,249 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.7
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Waktu pembuatan: 04 Jan 2022 pada 16.52
+-- Versi server: 5.7.32
+-- Versi PHP: 7.4.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `powerindo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `banner`
+--
+
+CREATE TABLE `banner` (
+  `id` int(11) NOT NULL,
+  `banner` text NOT NULL,
+  `sort` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `banner`
+--
+
+INSERT INTO `banner` (`id`, `banner`, `sort`) VALUES
+(7, 'christopher-burns-8KfCR12oeUM-unsplash.jpg', 2),
+(8, 'c-d-x-RE4KOQzKig4-unsplash.jpg', 3),
+(9, 'bernard-hermant-Zpdb7-owcpw-unsplash.jpg', 4),
+(16, 'frank-mckenna-9sJMyPKlKhw-unsplash7.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `mail`
+--
+
+CREATE TABLE `mail` (
+  `id` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `name` text NOT NULL,
+  `subject` text NOT NULL,
+  `message` text NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `mail`
+--
+
+INSERT INTO `mail` (`id`, `email`, `name`, `subject`, `message`, `date`) VALUES
+(1, 'test@gmail.com', 'test', 'test', 'stese', '2022-01-04 16:43:43');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `portofolio`
+--
+
+CREATE TABLE `portofolio` (
+  `id` int(11) NOT NULL,
+  `judul` text NOT NULL,
+  `foto` text NOT NULL,
+  `author` text NOT NULL,
+  `tanggal` datetime NOT NULL,
+  `text` text NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `portofolio`
+--
+
+INSERT INTO `portofolio` (`id`, `judul`, `foto`, `author`, `tanggal`, `text`, `status`) VALUES
+(1, 'Testing', 'Screen_Shot_2021-09-12_at_1_02_45_PM.png', 'Powerindo Logam', '2021-12-28 23:33:54', '<div id=\"isPasted\" title=\"Page 4\"><div style=\"background-color: rgb(100.000000%, 100.000000%, 100.000000%);\"><p style=\"text-align: justify;\"><span style=\"font-size: 14pt; font-family: FiraSans; font-weight: 300; color: rgb(0, 0, 0);\">Perkembangan teknologi dan era globalisasi bergerak begitu cepat, menuntut kita harus siap atas perubahan dan hal baru yang datang, adatptasi dan berinovasi adalah jalan utama agar kita tidak tergerus perkembangan zaman.&nbsp;</span></p><p style=\"text-align: justify;\"><span style=\"font-size: 14pt; font-family: FiraSans; font-weight: 300; color: rgb(0, 0, 0);\">Semakin canggihnya teknologi manufaktur mengharuskan sumber daya manusia yang semakin siap menghadapi tantangan pasar global, perkembangan industri manufaktur di sebuah negara merupakan tolok ukur kemajuan industri manufaktur secara nasional di negara itu,perubahan- perubahan yang cepat dalam era globalisasi akan membawa implikasi pada pengelolahan ekonomi nasional maupun operasi dunia usaha sebagai pelaku kegiatan ekonomi.&nbsp;</span></p><p style=\"text-align: justify;\"><span style=\"font-size: 14pt; font-family: FiraSans; font-weight: 300; color: rgb(0, 0, 0);\">Solusi bergerak cepat adalah salah satu gerakan nyata untuk turut berpartisipasi pada perekonomian nasional dengan terus berinovasi menciptakan produk-produk manufaktur yang unggul, kompetitif dan bernilai. </span></p></div></div>', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `produk`
+--
+
+CREATE TABLE `produk` (
+  `id` int(11) NOT NULL,
+  `judul` text NOT NULL,
+  `foto` text NOT NULL,
+  `deskripsi` text NOT NULL,
+  `status` int(11) NOT NULL,
+  `tanggal` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `produk`
+--
+
+INSERT INTO `produk` (`id`, `judul`, `foto`, `deskripsi`, `status`, `tanggal`) VALUES
+(1, 'Manhole Cover Custom dan Grill', '[\"Screen_Shot_2021-12-28_at_11_23_47_PM2.png\",\"IMG_3953_no_BG2.png\"]', '<p id=\"isPasted\"><span style=\"color: rgb(0, 0, 0);\">Manhole cover atau adalah komponen drainase yang terbuat dari besi cor dengan fungsi utama sebagai penutup lubang (manhole) pada saluran drainase.</span></p><p><span style=\"color: rgb(0, 0, 0);\">Manhole cover juga biasa disebut grill manhole, tutup manhole dan/atau tutup bak kontrol. Satu unit grill manhole terdiri dari frame dan cover. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p><p><span style=\"color: rgb(0, 0, 0);\">Desain tutup manhole ada yang menggunakan engsel dan ada yang tanpa engsel. Engsel berfungsi untuk menyatukan bagian frame dan cover sehingga tidak mudah terpisah.</span></p><p><span style=\"color: rgb(0, 0, 0);\">Manhole dan grill jalan merupakan 2 komponen yang berbeda, meskipun sama-sama sebagai komponen yang efektif untuk mengatasi banjir.</span></p><ul><li style=\"color: rgb(0, 0, 0);\">Bahan material baja coran</li><li style=\"color: rgb(0, 0, 0);\">Model removeable sehingga mudah dibuka dan tutup</li><li style=\"color: rgb(0, 0, 0);\">Jaminan part.</li></ul>', 1, '2021-12-28 23:24:54'),
+(2, 'Roof Drain, Deck Drain', '[\"Screen_Shot_2021-12-28_at_11_44_52_PM.png\"]', '<p id=\"isPasted\" style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Roof drain adalah salah satu komponen drainase yang digunakan pada saluran drainase dengan debit air kecil.</span></p><ul><li style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Bahan material besi cor</span></li><li style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Diameter pipa dari 2&quot;, 2.5&quot;, 3&quot;, 4&quot;, 6&quot;, 8&quot;, 10&quot;, 12&quot;</span></li><li style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Bentuk tutup datar dan cembung</span></li></ul><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Deck drain adalah komponen drainase yang berfungsi untuk menyalurkan air dari permukaan ke saluran pembuangan. Deck drain biasanya digunakan pada saluran drainase jembatan dan jalan tol. Deck drain terbuat dari material besi cor dengan proses pengecoran logam.</span></p>', 1, '2021-12-28 23:43:46'),
+(3, 'Kursi Taman', '[\"Screen_Shot_2021-12-28_at_11_46_52_PM.png\"]', '<p id=\"isPasted\" style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Kursi taman besi ornamental merupakan salah satu furniture yang sangat dibutuhkan dalam rangka menciptakan kenyamanan pada sebuah taman. Baik itu taman kota, taman hotel, taman rumah sakit, alun-alun, dll. Kursi ini berfungsi sebagai tempat duduk para pengunjung taman sehingga mereka dapat menikmati suasana taman dengan lebih nyaman.&nbsp;</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Terlebih apabila kursi tersebut berkonsep ornamental, tentu juga memiliki nilai lebih yaitu dapat menambah fungsi estetika taman itu sendiri.&nbsp;</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Pola ukir yang berlekuk- lekuknya bagaikan sebuah karya bernilai seni tinggi yang memberikan kesan visual menarik dan indah.</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Tersedia berbagai desain yang bisa disesuaikan dengan keinginan konsumen.</span></p>', 1, '2021-12-28 23:46:09'),
+(4, 'Lampu Taman', '[\"Screen_Shot_2021-12-28_at_11_47_54_PM.png\"]', '<p id=\"isPasted\" style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Tiang lampu antik ini terbuat dari bahan besi dengan motif dan corak untuk finishingnya sehingga kelihatan menonjol dari segi artistiknya. tiang lampu antik ini biasanya digunakan sebagai tiang lampu di taman.</span></p><p style=\"text-align: justify;\"><span style=\"color: rgb(0, 0, 0);\">Tersedia berbagai macam model sesuai dengan keinginan konsumen.</span></p>', 1, '2021-12-28 23:47:58'),
+(5, 'Bollar', '[\"Screen_Shot_2021-12-28_at_11_50_07_PM.png\"]', '<p>Bollard adalah patok besi cor untuk jalan, trotoar, taman hingga pelabuhan.Bollard terbuat dari besi cor yang berstandar Nasional. Bollard paling sering kita lihat di trotoar jalan kota, pemasangan tersebut dapat mendukung sebuah kota menjadi smart city karena dapat membuat kota lebih ramah, dapat melindungi pejalan kaki yang melintasi jalan trotoar dari para pengendara motor</p>', 1, '2021-12-28 23:49:47'),
+(7, 'asdasdasd', '[\"bernard-hermant-Zpdb7-owcpw-unsplash1.jpg\",\"c-d-x-RE4KOQzKig4-unsplash1.jpg\",\"christopher-burns-8KfCR12oeUM-unsplash1.jpg\"]', '<p>asdasdasd asdas das</p>', 1, '2022-01-04 00:08:10'),
+(13, 'zzzz', '[\"christopher-burns-8KfCR12oeUM-unsplash2.jpg\",\"frank-mckenna-9sJMyPKlKhw-unsplash.jpg\",\"IMG_3953_no_BG.png\"]', '<p>asdasdasd</p>', 1, '2022-01-04 00:21:06'),
+(16, 'zzxczxcz', '[\"bernard-hermant-Zpdb7-owcpw-unsplash2.jpg\",\"c-d-x-RE4KOQzKig4-unsplash2.jpg\",\"christopher-burns-8KfCR12oeUM-unsplash3.jpg\"]', '<ol><li>asdasdasdasd</li></ol>', 1, '2022-01-04 00:24:45');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `profile`
+--
+
+CREATE TABLE `profile` (
+  `id` int(11) NOT NULL,
+  `main_title` text NOT NULL,
+  `tagline` text NOT NULL,
+  `quote` text NOT NULL,
+  `nama` text NOT NULL,
+  `logo` text,
+  `visi` text NOT NULL,
+  `misi` text NOT NULL,
+  `core_value` text NOT NULL,
+  `fast_moving` text NOT NULL,
+  `alamat` text NOT NULL,
+  `maps` text NOT NULL,
+  `phone` text NOT NULL,
+  `email` text NOT NULL,
+  `domain_bisnis` text NOT NULL,
+  `video` text,
+  `profil` text,
+  `facebook` text,
+  `twitter` text,
+  `instagram` text,
+  `linkedin` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `profile`
+--
+
+INSERT INTO `profile` (`id`, `main_title`, `tagline`, `quote`, `nama`, `logo`, `visi`, `misi`, `core_value`, `fast_moving`, `alamat`, `maps`, `phone`, `email`, `domain_bisnis`, `video`, `profil`, `facebook`, `twitter`, `instagram`, `linkedin`) VALUES
+(1, 'POWERINDO LOGAM', 'Fast Moving', 'Spesialis Penjualan Produk Turunan Cor Logam', 'Powerindo Logam', 'logo_(1).png', '<p style=\"text-align:justify\">&quot;Menjadi Perusahaan pengecoran logam yang memiliki daya saing skala Nasional dan Internasional&quot;</p>\r\n', '<p>- Menjamin kualitas dan mutu produk</p>\r\n\r\n<p>- Mengutamakan kepuasan konsumen</p>\r\n\r\n<p>- Terus bergerak menjadi perusahaan yang inovatif dan berkemajuan</p>\r\n', '<p style=\"text-align:justify\">Untuk menjalankan visi dan misi perusahaan kami mengusung tema &quot;KITA&quot; sebagai nilai utama dalam perusahaan.</p>\r\n\r\n<p>&quot;KITA&quot;</p>\r\n\r\n<p>- Kualitas : Mengutamakan kualitas produk - Inovatif &amp; Kolaboratif : Kukatan kerja tim menjadi fokus untuk tercapainya tujuan dan selalu bergerak untuk membuat perusahaan sustainable mengikuti perkembangan teknologi</p>\r\n\r\n<p>- Tepat Waktu : Ketepatan waktu dalam pengerjaan pemesanan</p>\r\n\r\n<p>- Amanah : Menjalin hubungan baik dengan seluruh stakeholder dan shareholder</p>\r\n', '<p style=\"text-align:justify\">Perkembangan teknologi dan era globalisasi bergerak begitu cepat, menuntut kita harus siap atas perubahan dan hal baru yang datang, adatptasi dan berinovasi adalah jalan utama agar kita tidak tergerus perkembangan zaman.</p>\r\n\r\n<p style=\"text-align:justify\">Semakin canggihnya teknologi manufaktur mengharuskan sumber daya manusia yang semakin siap menghadapi tantangan pasar global, perkembangan industri manufaktur di sebuah negara merupakan tolok ukur kemajuan industri manufaktur secara nasional di negara itu,perubahan- perubahan yang cepat dalam era globalisasi akan membawa implikasi pada pengelolahan ekonomi nasional maupun operasi dunia usaha sebagai pelaku kegiatan ekonomi.</p>\r\n\r\n<p style=\"text-align:justify\">Solusi bergerak cepat adalah salah satu gerakan nyata untuk turut berpartisipasi pada perekonomian nasional dengan terus berinovasi menciptakan produk-produk manufaktur yang unggul, kompetitif dan bernilai.</p>\r\n', 'Jalan Karangwuni No.Km 2, Karang Kulon, Dlimas, Kec. Ceper, Kabupaten Klaten, Jawa Tengah 57465', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d63461.56592835762!2d106.784519!3d-6.2177736!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f71dafebfd57%3A0xf19623593db3f0f6!2sMuseum%20MACAN%20(Modern%20and%20Contemporary%20Art%20in%20Nusantara)!5e0!3m2!1sen!2sid!4v1641313088737!5m2!1sen!2sid\" style=\"width:100%\" height=\"400\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', '085747323913', 'marketing@powerindologam.com', 'Pengecoran Logam, Penjualan Produk Logam', 'https://www.youtube.com/embed/SEp9Kh0M4f0', '<p style=\"text-align:justify\">Powerindo Logam merupakan perusahaan yang bergerak pada bidang pengecoran logam, melakukan produksi dan penjualan produk-produk turunan dari logam. Powerindo Logam memiliki beragam produk pengecoran logam seperti komponen drainase untuk infrastruktur jalan, kursi taman, grill, bollard dan produk-produk berkualitas lainnya untuk memenuhi kebutuhan pasar Nasional dan Internasional.</p>\r\n', '', '', 'https://www.instagram.com/powerindologam/', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `by_pass` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `by_pass`) VALUES
+(1, 'admin', '5dfc6a03bff4157e050d56e95ecca4fd', 'jumahidganteng'),
+(2, 'powerindo', '1cdcdb814cf2791d8aeeef3edb094faf', 'gettinghigher');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `banner`
+--
+ALTER TABLE `banner`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `mail`
+--
+ALTER TABLE `mail`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `portofolio`
+--
+ALTER TABLE `portofolio`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `profile`
+--
+ALTER TABLE `profile`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `banner`
+--
+ALTER TABLE `banner`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT untuk tabel `mail`
+--
+ALTER TABLE `mail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `portofolio`
+--
+ALTER TABLE `portofolio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT untuk tabel `profile`
+--
+ALTER TABLE `profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
