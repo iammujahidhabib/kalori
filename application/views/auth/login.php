@@ -11,8 +11,13 @@
             <div class="carousel-item active" style="background-image: url(<?= base_url() ?>asset/corporate/assets/img/slide/slide-1.jpg);">
                 <div class="carousel-container">
                     <div class="carousel-content animate__animated animate__fadeInUp">
-                        <h2>Login <span>Company</span></h2>
-                        <form method="POST" action="<?=site_url('login/login_action')?>">
+                        <h2>Login <span>Makan Sehat</span></h2>
+                        <?php if(isset($_GET['url'])){
+                            $action = site_url('login/login_action')."?url=".$_GET['url'];
+                        }else{
+                            $action = site_url('login/login_action');
+                        } ?>
+                        <form method="POST" action="<?=$action?>">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
                                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

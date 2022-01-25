@@ -39,25 +39,33 @@ class Menu extends CI_Controller
     }
     public function pesan($id)
     {
-        $data['active'] = 'katering';
-        $sql = "SELECT * FROM menu JOIN nutrisi USING(id_nutrisi) WHERE id_menu = $id";
-        $data['menu'] = $this->M_template->query($sql)->row();
-        $id_vendor = $data['menu']->id_vendor;
-        $sql2 = "SELECT * FROM vendor JOIN kota USING(id_kota) WHERE id_vendor = $id_vendor";
-        $data['vendor'] = $this->M_template->query($sql2)->row();
-        if (!$this->input->post()) {
-            $this->load->view('template/header', $data);
-            $this->load->view('home/pesan', $data);
-            $this->load->view('template/footer', $data);
+        if ($this->session->isLogin != TRUE) {
+            redirect('login?url='.current_url());
         } else {
-            echo "<pre>";
-            $customer = $this->M_template->view_where('customer', ['id_akun' => $this->input->post('id_customer')])->row();
-            $transaksi = $this->input->post();
-            $transaksi['id_customer'] = $customer->id_customer;
-            $transaksi['status_transaksi'] = 0;
-            print_r($transaksi);
-            $id_transaksi = $this->M_template->insert_id('transaksi', $transaksi);
-            redirect('transaksi/detail/' . $id_transaksi);
+            if ($this->session->role != 3) {
+                redirect('home');
+            } else {
+                $data['active'] = 'katering';
+                $sql = "SELECT * FROM menu JOIN nutrisi USING(id_nutrisi) WHERE id_menu = $id";
+                $data['menu'] = $this->M_template->query($sql)->row();
+                $id_vendor = $data['menu']->id_vendor;
+                $sql2 = "SELECT * FROM vendor JOIN kota USING(id_kota) WHERE id_vendor = $id_vendor";
+                $data['vendor'] = $this->M_template->query($sql2)->row();
+                if (!$this->input->post()) {
+                    $this->load->view('template/header', $data);
+                    $this->load->view('home/pesan', $data);
+                    $this->load->view('template/footer', $data);
+                } else {
+                    echo "<pre>";
+                    $customer = $this->M_template->view_where('customer', ['id_akun' => $this->input->post('id_customer')])->row();
+                    $transaksi = $this->input->post();
+                    $transaksi['id_customer'] = $customer->id_customer;
+                    $transaksi['status_transaksi'] = 0;
+                    print_r($transaksi);
+                    $id_transaksi = $this->M_template->insert_id('transaksi', $transaksi);
+                    redirect('transaksi/detail/' . $id_transaksi);
+                }
+            }
         }
     }
 }

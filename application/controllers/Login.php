@@ -47,10 +47,16 @@ class Login extends CI_Controller
                 $lengkap = $this->M_template->view_where('customer', ['id_akun' => $login['id_akun']])->row_array();
                 $_to = 'home';
                 $this->session->set_userdata($lengkap);
+                echo $_GET['url'];
             }
             $this->session->set_userdata($session);
             // print_r($this->session->userdata());
-            redirect($_to);
+            if (isset($_GET['url'])) {
+                $explode = explode(base_url(), $_GET['url']);
+                redirect($explode[1]);
+            } else {
+                redirect($_to);
+            }
         } else {
             $this->session->set_flashdata('error_log', '<div class="alert alert-danger" role="alert">Username atau Password salah! </div>');
             redirect('login');

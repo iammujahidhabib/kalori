@@ -8,6 +8,13 @@ class Transaksi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_template');
+        if ($this->session->isLogin != TRUE) {
+            redirect('login');
+        } else {
+            if ($this->session->role != 3) {
+                redirect('home');
+            }
+        }
     }
     public function index()
     {

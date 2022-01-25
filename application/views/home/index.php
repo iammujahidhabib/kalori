@@ -84,15 +84,19 @@
                     <?php foreach ($suggest_makanan as $key) { ?>
                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch card" data-aos="zoom-in" data-aos-delay="100">
                             <div class="icon-box iconbox-blue">
-                                <div class="icon" style="width: 100% !important; height: auto;">
-                                    <?php if ($key->foto_menu) { ?>
-                                        <img src="<?= base_url('asset/logo/' . $key->foto_menu) ?>" class="img-fluid" alt="">
-                                    <?php } else { ?>
-                                        <img src="https://i0.wp.com/f1-styx.imgix.net/article/2021/09/29103622/sepiring-makanan-untuk-diet.jpg?fit=900%2C602&ssl=1" class="img-fluid">
-                                    <?php } ?>
-                                </div>
-                                <h4><a href=""><?= $key->nama ?></a></h4>
-                                <p><?= $key->keterangan ?></p>
+                                <a href="<?= site_url('menu/detail/' . $key->id_menu) ?>">
+                                    <div class="icon" style="width: 100% !important; height: auto;">
+                                        <?php if ($key->foto_menu) { ?>
+                                            <img src="<?= base_url('asset/logo/' . $key->foto_menu) ?>" class="img-fluid" alt="">
+                                        <?php } else { ?>
+                                            <img src="https://i0.wp.com/f1-styx.imgix.net/article/2021/09/29103622/sepiring-makanan-untuk-diet.jpg?fit=900%2C602&ssl=1" class="img-fluid">
+                                        <?php } ?>
+                                    </div>
+                                    <h4><?= $key->nama ?></h4>
+                                </a>
+                                <p><?= $key->durasi ?> hari</p>
+                                <p>Rp <?= $key->harga ?></p>
+                                <a href="<?= site_url('menu/pesan/' . $key->id_menu) ?>" class="btn btn-primary" title="Pesan">Pesan <i class="bx bx-shopping-bag" style="color: white;"></i></a>
                             </div>
                         </div>
                     <?php } ?>
