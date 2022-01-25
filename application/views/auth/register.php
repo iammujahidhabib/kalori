@@ -34,7 +34,7 @@
 								<input type="text" name="phone_number" class="form-control" id="phone_number">
 							</div>
 							<div class="form-group">
-								<label for="gender">Jenis Kelamin</label>
+								<label for="jenis_kelamin">Jenis Kelamin</label>
 								<select class="form-control" name="gender">
 									<option selected disabled value=""> -- Apakah gender anda -- </option>
 									<option value="Men"> Laki-laki </option>

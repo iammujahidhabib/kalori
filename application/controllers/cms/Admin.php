@@ -323,7 +323,104 @@ class Admin extends CI_Controller
             redirect('cms/login/');
         }
     }
-
+    // ------------------------------
+    // ------------------------------
+    // ------------------------------
+    // KATEGORI
+    public function kategori()
+    {
+        $data['kategori'] = $this->M_template->view('kategori')->result();
+        $this->load->view('admin/header');
+        $this->load->view('admin/kategori/index', $data);
+        $this->load->view('admin/footer');
+    }
+    public function kategoriku($id)
+    {
+        $data['kategori'] = $this->M_template->view_where('kategori', ['id_kategori' => $id])->result();
+        $this->load->view('admin/header');
+        $this->load->view('admin/kategori/detail', $data);
+        $this->load->view('admin/footer');
+    }
+    public function create_kategori()
+    {
+        $this->load->view('admin/header');
+        $this->load->view('admin/kategori/create');
+        $this->load->view('admin/footer');
+    }
+    public function edit_kategori($id)
+    {
+        $data['kategori'] = $this->M_template->view_where('kategori', ['id_kategori' => $id])->result();
+        $this->load->view('admin/header');
+        $this->load->view('admin/kategori/edit', $data);
+        $this->load->view('admin/footer');
+    }
+    public function save_kategori()
+    {
+        $data = $this->input->post();
+        $this->M_template->insert('kategori', $data);
+        redirect('cms/admin/kategori');
+    }
+    public function update_kategori($id)
+    {
+        $data = $this->input->post();
+        $this->M_template->update('kategori', ['id_kategori' => $id], $data);
+        // $this->M_template->insert('kategori', $data);
+        redirect('cms/admin/kategori');
+    }
+    public function delete_kategori($id)
+    {
+        $this->M_template->delete('kategori', ['id_kategori' => $id]);
+        redirect('cms/admin/kategori');
+    }
+    // ------------------------------
+    // ------------------------------
+    // ------------------------------
+    // KALORI
+    public function kalori()
+    {
+        $data['nutrisi'] = $this->M_template->view('nutrisi')->result();
+        $this->load->view('admin/header');
+        $this->load->view('admin/kalori/index', $data);
+        $this->load->view('admin/footer');
+    }
+    public function kaloriku($id)
+    {
+        $data['nutrisi'] = $this->M_template->view_where('nutrisi', ['id_nutrisi' => $id])->result();
+        $this->load->view('admin/header');
+        $this->load->view('admin/kalori/detail', $data);
+        $this->load->view('admin/footer');
+    }
+    public function create_kalori()
+    {
+        $this->load->view('admin/header');
+        $this->load->view('admin/kalori/create');
+        $this->load->view('admin/footer');
+    }
+    public function edit_kalori($id)
+    {
+        $data['nutrisi'] = $this->M_template->view_where('nutrisi', ['id_nutrisi' => $id])->row();
+        $this->load->view('admin/header');
+        $this->load->view('admin/kalori/edit', $data);
+        $this->load->view('admin/footer');
+    }
+    public function save_kalori()
+    {
+        $data = $this->input->post();
+        $this->M_template->insert('nutrisi', $data);
+        redirect('cms/admin/kalori');
+    }
+    public function update_kalori($id)
+    {
+        $data = $this->input->post();
+        $this->M_template->update('nutrisi', ['id_nutrisi' => $id], $data);
+        // $this->M_template->insert('nutrisi', $data);
+        redirect('cms/admin/kalori');
+    }
+    public function delete_kalori($id)
+    {
+        $this->M_template->delete('nutrisi', ['id_nutrisi' => $id]);
+        redirect('cms/admin/kalori');
+    }
     // BANNER
     // ======================
     // ======================

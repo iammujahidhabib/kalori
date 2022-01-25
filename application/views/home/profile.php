@@ -1,74 +1,68 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<main id="main">
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
+<section id="about" class="about ">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
 
-            <div class="section-title">
-                <h2>Profil</h2>
-                <h3>Mengenai perusahaan kami</h3>
-                <!-- <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p> -->
-            </div>
+    </div>
+</section>
+<section id="about" class="about ">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
 
-            <div class="row">
-                <?php if ($profile->video) { ?>
-                    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-                        <iframe src="<?= $profile->video ?>" style="width: 100%; height:400px">
-                        </iframe>
+        <div class="section-title">
+            <h2>Profile</h2>
+            <h3>Halo, <?= $profile->nama_customer ?>!</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <h5>Akun</h5>
+                <form method="POST" action="<?= site_url('profile/password') ?>">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="<?= $akun->email ?>" readonly>
                     </div>
-                <?php } ?>
-                <div class="<?= ($profile->video) ? 'col-lg-6' : 'col-lg-12' ?> pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
-                    <!-- Tabs navs -->
-                    <div class="container"><?= $profile->profil ?></div>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-12">
-                            <ul class="faq-list">
-                                <li>
-                                    <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Visi & Misi</div>
-                                    <div id="faq1" class="collapse" data-bs-parent=".faq-list">
-                                        <div>
-                                            <h4>Visi</h4>
-                                            <?= $profile->visi ?>
-                                            <h4>Misi</h4>
-                                            <?= $profile->misi ?>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Core Value</div>
-                                    <div id="faq2" class="collapse" data-bs-parent=".faq-list">
-                                        <div>
-                                            <?= $profile->core_value ?>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Fast Moving</div>
-                                    <div id="faq3" class="collapse" data-bs-parent=".faq-list">
-                                        <div>
-                                            <?= $profile->fast_moving ?>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </ul>
-                        </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password Lama</label>
+                        <input type="password" name="password_old" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
-                </div>
-
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group mt-2">
+                        <button type="submit" class="btn btn-primary">Ganti Password</button>
+                    </div>
+                </form>
             </div>
-    </section><!-- End About Section -->
-</main><!-- End #main -->
-<script>
-    $(document).ready(function() {
-        $(".nav-new-link").click(function() {
-            event.preventDefault();
-            var el = $(this).index();
-            $(".nav-new-link").removeClass('active');
-            $(".nav-new-link").eq(el).addClass("active");
-            console.log(el);
-        })
-    })
-</script>
+            <div class="col-sm-8">
+                <h5>Profile</h5>
+                <form method="POST" action="<?= site_url('profile/customer') ?>">
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" name="nama_customer" class="form-control" value="<?= $profile->nama_customer ?>" id="nama">
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_lahir">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir" value="<?= $profile->tanggal_lahir ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Nomor Telpon</label>
+                        <input type="text" name="phone_number" class="form-control" id="phone_number" value="<?= $profile->phone_number ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Jenis Kelamin</label>
+                        <select class="form-control" name="jenis_kelamin">
+                            <option disabled value=""> -- Apakah gender anda -- </option>
+                            <option value="Men" <?= $profile->jenis_kelamin == 'Men' ? 'selected' : '' ?>> Laki-laki </option>
+                            <option value="Women" <?= $profile->jenis_kelamin == 'Women' ? 'selected' : '' ?>> Perempuan </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <textarea name="alamat" id="alamat" required class="form-control"><?= $profile->nama_customer ?></textarea>
+                    </div>
+                    <div class="form-group mt-2">
+                        <button type="submit" class="btn btn-primary">Ubah Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+</section>

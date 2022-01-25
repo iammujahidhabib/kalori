@@ -84,6 +84,9 @@
                         <a href="<?= base_url() ?>cms/admin/kalori"> <i class="menu-icon fa fa-dashboard"></i>DB Kalori </a>
                     </li>
                     <li>
+                        <a href="<?= base_url() ?>cms/admin/kategori"> <i class="menu-icon fa fa-dashboard"></i>DB Kategori </a>
+                    </li>
+                    <li>
                         <a href="<?= base_url() ?>cms/admin/banner"> <i class="menu-icon fa fa-dashboard"></i>Banner </a>
                     </li>
                     <?php }elseif ($this->session->role == 2) {

@@ -29,6 +29,8 @@
     <!-- Template Main CSS File -->
     <link href="<?= base_url() ?>asset/corporate/assets/css/style.css" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
     <!-- =======================================================
   * Template Name: Company - v4.7.0
   * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
@@ -50,11 +52,14 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <li><a href="<?= site_url() ?>" class="">Home</a></li>
+            <li><a href="<?= site_url('katering') ?>" class="">Katering</a></li>
+            <li><a href="<?= site_url('menu') ?>" class="">Menu Sehat</a></li>
             <?php if ($this->session->isLogin == true) {
             ?>
-              <li><a href="<?= site_url() ?>" class="">Transaksi</a></li>
+              <li><a href="<?= site_url('transaksi') ?>" class="">Transaksi</a></li>
               <li class="dropdown"><a href="#"><span>Hello, <?= $this->session->nama_customer ?></span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
+                  <li><a href="<?= site_url('profile/') ?>">Profile</a></li>
                   <li><a href="<?= site_url('login/logout') ?>">Logout</a></li>
                   </li>
                 </ul>

@@ -85,7 +85,11 @@
                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch card" data-aos="zoom-in" data-aos-delay="100">
                             <div class="icon-box iconbox-blue">
                                 <div class="icon" style="width: 100% !important; height: auto;">
-                                    <img src="https://i0.wp.com/f1-styx.imgix.net/article/2021/09/29103622/sepiring-makanan-untuk-diet.jpg?fit=900%2C602&ssl=1" class="img-fluid">
+                                    <?php if ($key->foto_menu) { ?>
+                                        <img src="<?= base_url('asset/logo/' . $key->foto_menu) ?>" class="img-fluid" alt="">
+                                    <?php } else { ?>
+                                        <img src="https://i0.wp.com/f1-styx.imgix.net/article/2021/09/29103622/sepiring-makanan-untuk-diet.jpg?fit=900%2C602&ssl=1" class="img-fluid">
+                                    <?php } ?>
                                 </div>
                                 <h4><a href=""><?= $key->nama ?></a></h4>
                                 <p><?= $key->keterangan ?></p>
@@ -104,27 +108,27 @@
             <div class="section-title">
                 <h2>Rekanan Katering Kami</h2>
             </div>
-            <!-- <div class="row" data-aos="fade-up">
+            <div class="row" data-aos="fade-up">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="portfolio-flters">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">App</li>
-                        <li data-filter=".filter-card">Card</li>
-                        <li data-filter=".filter-web">Web</li>
+                        <li data-filter="*" class="filter-active">Semua</li>
+                        <?php foreach ($kota as $key) { ?>
+                            <li data-filter=".filter-<?= $key->id_kota ?>"><?= $key->nama_kota ?></li>
+                        <?php } ?>
                     </ul>
                 </div>
-            </div> -->
+            </div>
 
             <div class="row portfolio-container" data-aos="fade-up">
                 <?php foreach ($catering as $key) { ?>
-                    <a href="<?= site_url('home/katering/' . $key->id_vendor) ?>">
-                        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <a href="<?= site_url('katering/detail/' . $key->id_vendor) ?>">
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-<?= $key->id_kota ?>">
                             <img src="<?= base_url('asset/logo/' . $key->foto) ?>" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4><?= $key->nama_vendor ?></h4>
                                 <p><?= $key->alamat ?></p>
                                 <a href="<?= base_url('asset/logo/' . $key->foto) ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?= $key->nama_vendor ?>"><i class="bx bx-plus"></i></a>
-                                <a href="<?= site_url('home/katering/' . $key->id_vendor) ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                                <a href="<?= site_url('katering/detail/' . $key->id_vendor) ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </a>

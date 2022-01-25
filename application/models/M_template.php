@@ -49,4 +49,17 @@ class M_template extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+    public function join_where($tabel, $with, $using, $join = null, $where)
+    {
+        $this->db->select('*');
+        $this->db->from($tabel);
+        if ($join == null) {
+            $this->db->join($with, $using);
+        } else {
+            $this->db->join($with, $using, $join);
+        }
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query;
+    }
 }

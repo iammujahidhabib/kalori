@@ -12,8 +12,10 @@ class Home extends CI_Controller
     public function index()
     {
         $data['active'] = 'home';
+        $sql = "SELECT * FROM vendor JOIN kota USING(id_kota) order by rand()";
         // $data['banner'] = $this->M_template->view_order('banner','sort','ASC')->result();
-        $data['catering'] = $this->M_template->view('vendor')->result();
+        $data['kota'] = $this->M_template->view('kota')->result();
+        $data['catering'] = $this->M_template->query($sql)->result();
         $this->load->view('template/header', $data);
         $this->load->view('home/index', $data);
         $this->load->view('template/footer', $data);
@@ -31,11 +33,14 @@ class Home extends CI_Controller
         } else {
             redirect();
         }
-        $sql = "SELECT * FROM menu JOIN vendor USING(id_vendor) JOIN nutrisi USING(id_nutrisi) WHERE nutrisi.kalori > $kalori";
+        $sql = "SELECT * FROM menu JOIN vendor USING(id_vendor) JOIN kota USING(id_kota) JOIN nutrisi USING(id_nutrisi) WHERE nutrisi.kalori > $kalori";
+        $sql2 = "SELECT * FROM vendor JOIN kota USING(id_kota) order by rand() limit 6";
         // echo $sql;
-        $data['catering'] = $this->M_template->view('vendor')->result();
+        $data['kota'] = $this->M_template->view('kota')->result();
+        $data['catering'] = $this->M_template->query($sql2)->result();
         $data['suggest_makanan'] = $this->M_template->query($sql)->result();
         $data['inputan'] = $this->input->get();
+        $data['kategori'] = $this->M_template->view('kategori')->result();
         $data['kalori'] = $kalori;
         $this->load->view('template/header', $data);
         $this->load->view('home/index', $data);

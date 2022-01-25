@@ -60,35 +60,39 @@ class Vendor extends CI_Controller
     // ------------------------------
     // ------------------------------
     // ------------------------------
-    // PORTOFOLIO
+    // MENU
     public function menu()
     {
-        $data['menu'] = $this->M_template->view_where('menu',['id_vendor'=>$this->session->id_vendor])->result();
+        $data['menu'] = $this->M_template->join_where('menu', 'kategori', 'menu.id_kategori=kategori.id_kategori', 'left', ['id_vendor' => $this->session->id_vendor])->result();
         $this->load->view('admin/header');
         $this->load->view('admin/menu/index', $data);
         $this->load->view('admin/footer');
     }
-    public function akunku($id)
+    public function menuku($id)
     {
-        $data['akunfolio'] = $this->M_template->view_where('menu', ['id' => $id])->result();
+        $data['menu'] = $this->M_template->view_where('menu', ['id' => $id])->result();
         $this->load->view('admin/header');
         $this->load->view('admin/menu/detail', $data);
         $this->load->view('admin/footer');
     }
-    public function create_akun()
+    public function create_menu()
     {
+        $data['kategori'] = $this->M_template->view('kategori')->result();
+        $data['nutrisi'] = $this->M_template->view('nutrisi')->result();
         $this->load->view('admin/header');
         $this->load->view('admin/menu/create');
         $this->load->view('admin/footer');
     }
-    public function edit_akun($id)
+    public function edit_menu($id)
     {
-        $data['akunfolio'] = $this->M_template->view_where('akunfolio', ['id' => $id])->result();
+        $data['kategori'] = $this->M_template->view('kategori')->result();
+        $data['nutrisi'] = $this->M_template->view('nutrisi')->result();
+        $data['menu'] = $this->M_template->join_where('menu', 'kategori', 'menu.id_kategori=kategori.id_kategori', 'left', ['id_menu' => $id])->row();
         $this->load->view('admin/header');
         $this->load->view('admin/menu/edit', $data);
         $this->load->view('admin/footer');
     }
-    public function save_akun()
+    public function save_menu()
     {
         $data = $this->input->post();
         $config = array(
@@ -108,10 +112,10 @@ class Vendor extends CI_Controller
             echo $this->upload->display_errors();
         }
 
-        $this->M_template->insert('akunfolio', $data);
+        $this->M_template->insert('menu', $data);
         redirect('cms/vendor/menu');
     }
-    public function update_akun($id)
+    public function update_menu($id)
     {
         $data = $this->input->post();
         if ($_FILES['foto']['name'] != "") {
@@ -132,14 +136,14 @@ class Vendor extends CI_Controller
                 echo $this->upload->display_errors();
             }
         }
-        $this->M_template->update('akunfolio', ['id' => $id], $data);
-        // $this->M_template->insert('akunfolio', $data);
-        redirect('cms/admin/akun');
+        $this->M_template->update('menu', ['id' => $id], $data);
+        // $this->M_template->insert('menu', $data);
+        redirect('cms/admin/menu');
     }
-    public function delete_akun($id)
+    public function delete_menu($id)
     {
-        $this->M_template->delete('akunfolio', ['id' => $id]);
-        redirect('cms/admin/akun');
+        $this->M_template->delete('menu', ['id' => $id]);
+        redirect('cms/admin/menu');
     }
     // ------------------------------
     // ------------------------------
