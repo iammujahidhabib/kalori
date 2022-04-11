@@ -20,7 +20,12 @@ class Transaksi extends CI_Controller
     {
         $data['active'] = 'produk';
         $customer = $this->M_template->view_where('customer', ['id_akun' => $this->session->id_akun])->row();
-        $sql = "SELECT * FROM transaksi JOIN menu USING(id_menu) JOIN vendor USING(id_vendor) WHERE id_customer = $customer->id_customer";
+        $sql = "SELECT *, vendor.phone_number, vendor.alamat AS alamat_vendor FROM transaksi 
+        JOIN customer ON customer.id_customer=transaksi.id_customer 
+        JOIN menu ON menu.id_menu=transaksi.id_menu 
+        JOIN nutrisi ON menu.id_nutrisi=nutrisi.id_nutrisi 
+        JOIN vendor ON vendor.id_vendor=menu.id_vendor 
+        WHERE transaksi.id_customer = $customer->id_customer";
         $data['transaksi'] = $this->M_template->query($sql)->result();
         $this->load->view('template/header', $data);
         $this->load->view('home/transaksi', $data);
@@ -45,7 +50,7 @@ class Transaksi extends CI_Controller
     public function upload($id)
     {
         $config = array(
-            'upload_path' => './asset/bukti//',
+            'upload_path' => './asset/bukti/',
             'overwrite' => false,
             'remove_spaces' => true,
             'allowed_types' => 'png|jpg|gif|jpeg',
@@ -80,5 +85,29 @@ class Transaksi extends CI_Controller
 
         $this->load->library('image_lib', $config_manip);
         $this->image_lib->resize();
+    }
+    public function upload_ulang($id)
+    {
+        $config = array(
+            'upload_path' => './asset/bukti/',
+            'overwrite' => false,
+            'remove_spaces' => true,
+            'allowed_types' => 'png|jpg|gif|jpeg',
+            'max_size' => 10000,
+            'xss_clean' => true,
+        );
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+        if ($this->upload->do_upload('bukti')) {
+            $file_data = $this->upload->data();
+            $this->resizeImage($file_data['file_name']);
+            $data['bukti'] = $file_data['file_name'];
+            $data['status_transaksi'] = 1;
+            $data['note_vendor'] = null;
+            $this->M_template->update('transaksi', ['id_transaksi' => $id], $data);
+        } else {
+            echo $this->upload->display_errors();
+        }
+        redirect('transaksi/');
     }
 }

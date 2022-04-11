@@ -148,6 +148,33 @@ class Vendor extends CI_Controller
     // ------------------------------
     // ------------------------------
     // ------------------------------
+    // TRANSAKSI
+    public function transaksi()
+    {
+        $vendor = $this->M_template->view_where('vendor', ['id_akun' => $this->session->id_akun])->row();
+        $data['transaksi'] = $this->M_template->query("SELECT * FROM transaksi 
+        JOIN menu ON menu.id_menu=transaksi.id_menu 
+        JOIN nutrisi ON menu.id_nutrisi=nutrisi.id_nutrisi 
+        JOIN customer ON customer.id_customer=transaksi.id_customer
+        WHERE menu.id_vendor = $vendor->id_vendor")->result();
+        $this->load->view('admin/header');
+        $this->load->view('admin/transaksi/index', $data);
+        $this->load->view('admin/footer');
+    }
+    public function accept_transaksi($status, $id)
+    {
+        $this->M_template->update("transaksi", ['id_transaksi' => $id], ['status_transaksi' => $status, 'note_vendor' => null]);
+        redirect('cms/vendor/transaksi');
+    }
+    public function tolak_transaksi($id)
+    {
+        $alasan = $this->input->post('alasan');
+        $this->M_template->update("transaksi", ['id_transaksi' => $id], ['status_transaksi' => 4, 'note_vendor' => $alasan]);
+        redirect('cms/vendor/transaksi');
+    }
+    // ------------------------------
+    // ------------------------------
+    // ------------------------------
     // PRODUK
     public function produk()
     {

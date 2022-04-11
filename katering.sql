@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jan 25, 2022 at 03:44 PM
--- Server version: 5.7.32
--- PHP Version: 7.4.12
+-- Waktu pembuatan: 11 Apr 2022 pada 21.11
+-- Versi server: 5.7.32
+-- Versi PHP: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `akun`
+-- Struktur dari tabel `akun`
 --
 
 CREATE TABLE `akun` (
@@ -29,7 +29,7 @@ CREATE TABLE `akun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `akun`
+-- Dumping data untuk tabel `akun`
 --
 
 INSERT INTO `akun` (`id_akun`, `email`, `password`, `status`, `role`) VALUES
@@ -41,7 +41,7 @@ INSERT INTO `akun` (`id_akun`, `email`, `password`, `status`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Struktur dari tabel `customer`
 --
 
 CREATE TABLE `customer` (
@@ -55,7 +55,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `customer`
+-- Dumping data untuk tabel `customer`
 --
 
 INSERT INTO `customer` (`id_customer`, `nama_customer`, `phone_number`, `alamat`, `jenis_kelamin`, `tanggal_lahir`, `id_akun`) VALUES
@@ -64,7 +64,7 @@ INSERT INTO `customer` (`id_customer`, `nama_customer`, `phone_number`, `alamat`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Struktur dari tabel `kategori`
 --
 
 CREATE TABLE `kategori` (
@@ -73,7 +73,7 @@ CREATE TABLE `kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `kategori`
+-- Dumping data untuk tabel `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
@@ -85,7 +85,7 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kota`
+-- Struktur dari tabel `kota`
 --
 
 CREATE TABLE `kota` (
@@ -94,7 +94,7 @@ CREATE TABLE `kota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `kota`
+-- Dumping data untuk tabel `kota`
 --
 
 INSERT INTO `kota` (`id_kota`, `nama_kota`) VALUES
@@ -110,7 +110,7 @@ INSERT INTO `kota` (`id_kota`, `nama_kota`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu`
+-- Struktur dari tabel `menu`
 --
 
 CREATE TABLE `menu` (
@@ -127,7 +127,7 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `menu`
+-- Dumping data untuk tabel `menu`
 --
 
 INSERT INTO `menu` (`id_menu`, `nama`, `keterangan`, `status`, `durasi`, `harga`, `foto_menu`, `id_nutrisi`, `id_vendor`, `id_kategori`) VALUES
@@ -144,7 +144,7 @@ INSERT INTO `menu` (`id_menu`, `nama`, `keterangan`, `status`, `durasi`, `harga`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nutrisi`
+-- Struktur dari tabel `nutrisi`
 --
 
 CREATE TABLE `nutrisi` (
@@ -156,7 +156,7 @@ CREATE TABLE `nutrisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `nutrisi`
+-- Dumping data untuk tabel `nutrisi`
 --
 
 INSERT INTO `nutrisi` (`id_nutrisi`, `gram`, `sayur`, `kalori`, `batas`) VALUES
@@ -170,7 +170,7 @@ INSERT INTO `nutrisi` (`id_nutrisi`, `gram`, `sayur`, `kalori`, `batas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
 CREATE TABLE `transaksi` (
@@ -189,16 +189,16 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `transaksi`
+-- Dumping data untuk tabel `transaksi`
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_menu`, `id_customer`, `tanggal_pesan`, `qty`, `total`, `status_transaksi`, `bukti`, `date`, `nomor_penerima`, `alamat_kirim`, `note_vendor`) VALUES
-(1, 2, 1, '2022-01-31', 1, 150000, 1, 'demo-1.png', '2022-01-25 15:09:45', '12312312312', 'adasdasdasdsada', NULL);
+(1, 2, 1, '2022-03-31', 1, 150000, 1, 'Screen_Shot_2022-03-17_at_2_34_50_PM1.png', '2022-01-25 15:09:45', '12312312312', 'adasdasdasdsada', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vendor`
+-- Struktur dari tabel `vendor`
 --
 
 CREATE TABLE `vendor` (
@@ -214,7 +214,7 @@ CREATE TABLE `vendor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `vendor`
+-- Dumping data untuk tabel `vendor`
 --
 
 INSERT INTO `vendor` (`id_vendor`, `nama_vendor`, `alamat`, `phone_number`, `deskripsi`, `foto`, `tanggal_daftar`, `id_akun`, `id_kota`) VALUES
@@ -226,32 +226,32 @@ INSERT INTO `vendor` (`id_vendor`, `nama_vendor`, `alamat`, `phone_number`, `des
 --
 
 --
--- Indexes for table `akun`
+-- Indeks untuk tabel `akun`
 --
 ALTER TABLE `akun`
   ADD PRIMARY KEY (`id_akun`);
 
 --
--- Indexes for table `customer`
+-- Indeks untuk tabel `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id_customer`),
   ADD KEY `fkac` (`id_akun`);
 
 --
--- Indexes for table `kategori`
+-- Indeks untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indexes for table `kota`
+-- Indeks untuk tabel `kota`
 --
 ALTER TABLE `kota`
   ADD PRIMARY KEY (`id_kota`);
 
 --
--- Indexes for table `menu`
+-- Indeks untuk tabel `menu`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`id_menu`),
@@ -259,13 +259,13 @@ ALTER TABLE `menu`
   ADD KEY `fkmv` (`id_vendor`);
 
 --
--- Indexes for table `nutrisi`
+-- Indeks untuk tabel `nutrisi`
 --
 ALTER TABLE `nutrisi`
   ADD PRIMARY KEY (`id_nutrisi`);
 
 --
--- Indexes for table `transaksi`
+-- Indeks untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
@@ -273,90 +273,90 @@ ALTER TABLE `transaksi`
   ADD KEY `fktm` (`id_menu`);
 
 --
--- Indexes for table `vendor`
+-- Indeks untuk tabel `vendor`
 --
 ALTER TABLE `vendor`
   ADD PRIMARY KEY (`id_vendor`),
   ADD KEY `fkav` (`id_akun`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `akun`
+-- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
   MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT untuk tabel `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `kategori`
+-- AUTO_INCREMENT untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `kota`
+-- AUTO_INCREMENT untuk tabel `kota`
 --
 ALTER TABLE `kota`
   MODIFY `id_kota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `menu`
+-- AUTO_INCREMENT untuk tabel `menu`
 --
 ALTER TABLE `menu`
   MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `nutrisi`
+-- AUTO_INCREMENT untuk tabel `nutrisi`
 --
 ALTER TABLE `nutrisi`
   MODIFY `id_nutrisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `transaksi`
+-- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `vendor`
+-- AUTO_INCREMENT untuk tabel `vendor`
 --
 ALTER TABLE `vendor`
   MODIFY `id_vendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `customer`
+-- Ketidakleluasaan untuk tabel `customer`
 --
 ALTER TABLE `customer`
   ADD CONSTRAINT `fkac` FOREIGN KEY (`id_akun`) REFERENCES `akun` (`id_akun`);
 
 --
--- Constraints for table `menu`
+-- Ketidakleluasaan untuk tabel `menu`
 --
 ALTER TABLE `menu`
   ADD CONSTRAINT `fkmn` FOREIGN KEY (`id_nutrisi`) REFERENCES `nutrisi` (`id_nutrisi`),
   ADD CONSTRAINT `fkmv` FOREIGN KEY (`id_vendor`) REFERENCES `vendor` (`id_vendor`);
 
 --
--- Constraints for table `transaksi`
+-- Ketidakleluasaan untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD CONSTRAINT `fktc` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id_customer`),
   ADD CONSTRAINT `fktm` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`id_menu`);
 
 --
--- Constraints for table `vendor`
+-- Ketidakleluasaan untuk tabel `vendor`
 --
 ALTER TABLE `vendor`
   ADD CONSTRAINT `fkav` FOREIGN KEY (`id_akun`) REFERENCES `akun` (`id_akun`);
