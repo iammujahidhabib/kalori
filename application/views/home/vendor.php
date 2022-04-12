@@ -11,12 +11,12 @@
         </div>
         <div class="row" data-aos="fade-up">
             <div class="col-lg-12 d-flex justify-content-center">
-                <ul id="portfolio-flters">
+                <!-- <ul id="portfolio-flters">
                     <li data-filter="*" class="filter-active">Semua</li>
                     <?php foreach ($kota as $key) { ?>
                         <li data-filter=".filter-<?= $key->id_kota ?>"><?= $key->nama_kota ?></li>
                     <?php } ?>
-                </ul>
+                </ul> -->
             </div>
         </div>
 

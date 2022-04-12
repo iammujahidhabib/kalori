@@ -15,11 +15,65 @@ class Login extends CI_Controller
     }
     public function register()
     {
-        $this->load->view('auth/register');
+        if ($this->input->post()) {
+            $akun = $this->M_template->insert_id('akun', [
+                'email' => $this->input->post('email'),
+                'password' => $this->input->post('password'),
+                'role' => 3,
+                'status' => 1,
+            ]);
+            $customer = $this->M_template->insert_id('customer', [
+                'nama_customer' => $this->input->post('nama_customer'),
+                'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+                'phone_number' => $this->input->post('phone_number'),
+                'alamat' => $this->input->post('alamat'),
+                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+                'id_akun' => $akun,
+            ]);
+            redirect('login');
+        } else {
+            $this->load->view('auth/register');
+        }
     }
     public function register_vendor()
     {
-        $this->load->view('auth/register_vendor');
+        if ($this->input->post()) {
+            $akun = $this->M_template->insert_id('akun', [
+                'email' => $this->input->post('email'),
+                'password' => $this->input->post('password'),
+                'role' => 2,
+                'status' => 1,
+            ]);
+            $data=[
+                'nama_vendor' => $this->input->post('nama_vendor'),
+                'deskripsi' => $this->input->post('deskripsi'),
+                'phone_number' => $this->input->post('phone_number'),
+                'alamat' => $this->input->post('alamat'),
+                'id_akun' => $akun,
+            ];
+            if ($_FILES['foto']['name'] != "") {
+                $config = array(
+                    'upload_path' => './asset/logo/',
+                    'overwrite' => false,
+                    'remove_spaces' => true,
+                    'allowed_types' => 'png|jpg|gif|jpeg',
+                    'max_size' => 10000,
+                    'xss_clean' => true,
+                );
+                $this->load->library('upload');
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('foto')) {
+                    $file_data = $this->upload->data();
+                    $data['foto'] = $file_data['file_name'];
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+            $customer = $this->M_template->insert_id('vendor', $data);
+            redirect('login');
+        } else {
+            $this->load->view('auth/register_vendor');
+        }
     }
     public function login_action()
     {
