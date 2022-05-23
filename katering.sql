@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Waktu pembuatan: 11 Apr 2022 pada 21.11
+-- Waktu pembuatan: 23 Bulan Mei 2022 pada 16.08
 -- Versi server: 5.7.32
 -- Versi PHP: 7.4.12
 
@@ -36,7 +36,8 @@ INSERT INTO `akun` (`id_akun`, `email`, `password`, `status`, `role`) VALUES
 (1, 'admin@admin.com', 'admin', 1, 1),
 (2, 'vendor@vendor.com', 'vendor', 1, 2),
 (3, 'customer@customer.com', 'customer', 1, 3),
-(4, 'abc@vendor.com', 'abc', 1, 2);
+(4, 'abc@vendor.com', 'abc', 1, 2),
+(6, 'mangkato2021@gmail.com', 'mangkato2021', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,40 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id_customer`, `nama_customer`, `phone_number`, `alamat`, `jenis_kelamin`, `tanggal_lahir`, `id_akun`) VALUES
-(1, 'Customer', '0921123', 'Bandung, Jawa Barat', 'Men', '1999-02-19', 3);
+(1, 'Customer', '0921123', 'Bandung, Jawa Barat', 'Men', '1999-02-19', 3),
+(2, 'Mangka To', '082137244805', 'Jalan Komplek Permata Buah Batu D 22', 'Men', '2000-06-23', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jadwal`
+--
+
+CREATE TABLE `jadwal` (
+  `id_jadwal` int(11) NOT NULL,
+  `id_menu` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
+  `date_jadwal` date NOT NULL,
+  `gambar` varchar(255) DEFAULT NULL,
+  `remark` text,
+  `status` int(11) NOT NULL,
+  `upload_date` datetime DEFAULT NULL,
+  `id_vendor` int(11) NOT NULL,
+  `id_customer` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `jadwal`
+--
+
+INSERT INTO `jadwal` (`id_jadwal`, `id_menu`, `id_transaksi`, `date_jadwal`, `gambar`, `remark`, `status`, `upload_date`, `id_vendor`, `id_customer`) VALUES
+(1, 2, 1, '2022-05-31', '51447843_1237921336370340_3553161070283587584_n.jpeg', 'Test', 1, '2022-05-23 21:40:54', 1, 1),
+(2, 2, 1, '2022-06-01', NULL, NULL, 0, NULL, 1, 1),
+(3, 2, 1, '2022-06-02', NULL, NULL, 0, NULL, 1, 1),
+(4, 2, 1, '2022-06-03', NULL, NULL, 0, NULL, 1, 1),
+(5, 2, 1, '2022-06-04', NULL, NULL, 0, NULL, 1, 1),
+(6, 2, 1, '2022-06-05', NULL, NULL, 0, NULL, 1, 1),
+(7, 2, 1, '2022-06-06', NULL, NULL, 0, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -193,7 +227,7 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_menu`, `id_customer`, `tanggal_pesan`, `qty`, `total`, `status_transaksi`, `bukti`, `date`, `nomor_penerima`, `alamat_kirim`, `note_vendor`) VALUES
-(1, 2, 1, '2022-03-31', 1, 150000, 1, 'Screen_Shot_2022-03-17_at_2_34_50_PM1.png', '2022-01-25 15:09:45', '12312312312', 'adasdasdasdsada', NULL);
+(1, 2, 1, '2022-05-31', 1, 150000, 3, 'Screen_Shot_2022-03-17_at_2_34_50_PM1.png', '2022-01-25 15:09:45', '12312312312', 'adasdasdasdsada', NULL);
 
 -- --------------------------------------------------------
 
@@ -237,6 +271,12 @@ ALTER TABLE `akun`
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id_customer`),
   ADD KEY `fkac` (`id_akun`);
+
+--
+-- Indeks untuk tabel `jadwal`
+--
+ALTER TABLE `jadwal`
+  ADD PRIMARY KEY (`id_jadwal`);
 
 --
 -- Indeks untuk tabel `kategori`
@@ -287,13 +327,19 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `jadwal`
+--
+ALTER TABLE `jadwal`
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`

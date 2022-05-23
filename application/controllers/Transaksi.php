@@ -110,4 +110,45 @@ class Transaksi extends CI_Controller
         }
         redirect('transaksi/');
     }
+    public function jadwal($id)
+    {
+        $customer = $this->M_template->view_where('customer', ['id_akun' => $this->session->id_akun])->row();
+        $sql = "SELECT *, jadwal.status AS status_jadwal, vendor.phone_number, vendor.alamat AS alamat_vendor FROM jadwal 
+        JOIN transaksi ON transaksi.id_transaksi=jadwal.id_transaksi 
+        JOIN menu ON menu.id_menu=transaksi.id_menu 
+        JOIN vendor ON vendor.id_vendor=menu.id_vendor 
+        WHERE transaksi.id_customer = $customer->id_customer
+        AND jadwal.id_transaksi=$id";
+        $data['jadwal'] = $this->M_template->query($sql)->result();
+        // echo "<pre>"; 
+        // print_r($data);
+        $this->load->view('template/header', $data);
+        $this->load->view('home/jadwal', $data);
+        $this->load->view('template/footer', $data);
+    }
+    public function upload_makanan($id)
+    {
+        $data['remark']=$this->input->post('remark');
+        $config = array(
+            'upload_path' => './asset/bukti/',
+            'overwrite' => false,
+            'remove_spaces' => true,
+            'allowed_types' => 'png|jpg|gif|jpeg',
+            'max_size' => 10000,
+            'xss_clean' => true,
+        );
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+        if ($this->upload->do_upload('gambar')) {
+            $file_data = $this->upload->data();
+            $this->resizeImage($file_data['file_name']);
+            $data['gambar'] = $file_data['file_name'];
+            $data['status'] = 1;
+            $data['upload_date'] = date('Y-m-d H:i:s');
+            $this->M_template->update('jadwal', ['id_jadwal' => $id], $data);
+        } else {
+            echo $this->upload->display_errors();
+        }
+        redirect('transaksi/jadwal/' . $id);
+    }
 }

@@ -16,21 +16,28 @@ class Login extends CI_Controller
     public function register()
     {
         if ($this->input->post()) {
-            $akun = $this->M_template->insert_id('akun', [
-                'email' => $this->input->post('email'),
-                'password' => $this->input->post('password'),
-                'role' => 3,
-                'status' => 1,
-            ]);
-            $customer = $this->M_template->insert_id('customer', [
-                'nama_customer' => $this->input->post('nama_customer'),
-                'tanggal_lahir' => $this->input->post('tanggal_lahir'),
-                'phone_number' => $this->input->post('phone_number'),
-                'alamat' => $this->input->post('alamat'),
-                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                'id_akun' => $akun,
-            ]);
-            redirect('login');
+            $cek = $this->M_template->view_where('akun', ['email' => $this->input->post('email')])->row();
+            if (!empty($row)) {
+                $akun = $this->M_template->insert_id('akun', [
+                    'email' => $this->input->post('email'),
+                    'password' => $this->input->post('password'),
+                    'role' => 3,
+                    'status' => 1,
+                ]);
+                $customer = $this->M_template->insert_id('customer', [
+                    'nama_customer' => $this->input->post('nama_customer'),
+                    'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+                    'phone_number' => $this->input->post('phone_number'),
+                    'alamat' => $this->input->post('alamat'),
+                    'jenis_kelamin' => $this->input->post('gender'),
+                    'id_akun' => $akun,
+                ]);
+                $this->session->set_flashdata('message', "<script>alert('Anda berhasil mendaftar. Silahkan login.')</script>");
+                redirect('login');
+            }else{
+                $this->session->set_flashdata('message', "<script>alert('Email sudah digunakan pengguna lain.')</script>");
+            $this->load->view('auth/register');
+        }
         } else {
             $this->load->view('auth/register');
         }
@@ -44,7 +51,7 @@ class Login extends CI_Controller
                 'role' => 2,
                 'status' => 1,
             ]);
-            $data=[
+            $data = [
                 'nama_vendor' => $this->input->post('nama_vendor'),
                 'deskripsi' => $this->input->post('deskripsi'),
                 'phone_number' => $this->input->post('phone_number'),
@@ -70,6 +77,7 @@ class Login extends CI_Controller
                 }
             }
             $customer = $this->M_template->insert_id('vendor', $data);
+            $this->session->set_flashdata('message', "<script>alert('Anda berhasil mendaftar. Silahkan login.')</script>");
             redirect('login');
         } else {
             $this->load->view('auth/register_vendor');
@@ -109,6 +117,7 @@ class Login extends CI_Controller
                 $explode = explode(base_url(), $_GET['url']);
                 redirect($explode[1]);
             } else {
+                // print_r($this->session->userdata);
                 redirect($_to);
             }
         } else {

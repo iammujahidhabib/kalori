@@ -164,6 +164,20 @@ class Vendor extends CI_Controller
     public function accept_transaksi($status, $id)
     {
         $this->M_template->update("transaksi", ['id_transaksi' => $id], ['status_transaksi' => $status, 'note_vendor' => null]);
+        $transaksi = $this->M_template->view_where("transaksi", ['id_transaksi' => $id])->row();
+        $menu = $this->M_template->view_where("menu", ['id_menu' => $transaksi->id_menu])->row();
+        $tanggal_pesan = $transaksi->tanggal_pesan;
+        for ($i=0; $i <$menu->durasi ; $i++) { 
+            $this->M_template->insert("jadwal",[
+                'id_transaksi'=>$transaksi->id_transaksi,
+                'id_menu'=>$transaksi->id_menu,
+                'id_customer'=>$transaksi->id_customer,
+                'id_vendor'=>$menu->id_vendor,
+                'date_jadwal'=>$tanggal_pesan,
+                'status'=>0,
+            ]);
+            $tanggal_pesan = date('Y-m-d',strtotime($tanggal_pesan . "+1 days"));
+        }
         redirect('cms/vendor/transaksi');
     }
     public function tolak_transaksi($id)
