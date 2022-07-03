@@ -80,7 +80,7 @@ class Vendor extends CI_Controller
         $data['kategori'] = $this->M_template->view('kategori')->result();
         $data['nutrisi'] = $this->M_template->view('nutrisi')->result();
         $this->load->view('admin/header');
-        $this->load->view('admin/menu/create');
+        $this->load->view('admin/menu/create',$data);
         $this->load->view('admin/footer');
     }
     public function edit_menu($id)
