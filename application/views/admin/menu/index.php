@@ -30,13 +30,13 @@
                     </div> -->
                     <div class="card-body">
                         <a href="<?= base_url() ?>cms/vendor/create_menu/" class="btn btn-primary mb-4 align-right">Create</a>
-                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                        <table id="bootstrap-data-table-export" class="table small table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Kategori</th>
                                     <th>Nama</th>
-                                    <th>Keterangan</th>
+                                    <!-- <th>Keterangan</th> -->
                                     <th>Durasi</th>
                                     <th>Harga</th>
                                     <th>Aksi</th>
@@ -49,9 +49,9 @@
                                         <td><?= $no ?></td>
                                         <td><?= $key->nama_kategori ?></td>
                                         <td><?= $key->nama ?></td>
-                                        <td><?= $key->keterangan ?></td>
-                                        <td><?= $key->durasi ?> Harga</td>
-                                        <td><?= $key->harga ?></td>
+                                        <!-- <td><?= $key->keterangan ?></td> -->
+                                        <td><?= $key->durasi ?> Hari</td>
+                                        <td>Rp <?= number_format($key->harga,0,",",".") ?></td>
                                         <td>
                                             <a class="btn btn-secondary btn-sm text-white" href="<?= base_url() ?>cms/vendor/menuku/<?= $key->id_menu ?>"><i class="fa fa-eye"></i></a>
                                             <a class="btn btn-warning btn-sm text-white" href="<?= base_url() ?>cms/vendor/edit_menu/<?= $key->id_menu ?>"><i class="fa fa-pencil"></i></a>

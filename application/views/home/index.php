@@ -66,7 +66,7 @@
                             </select>
                         </div>
                         <div class="form-group m-2">
-                            <input type="submit" class="btn btn-block btn-primary" value="Hitung">
+                            <button type="submit" class="btn btn-block btn-outline-success w-100">Hitung Kebutuhanku</button>
                         </div>
                     </form>
                 </div>
@@ -74,11 +74,47 @@
 
         </div>
     </section><!-- End About Us Section -->
+    <section id="clients" class="clients section-bg">
+        <div class="container" data-aos="fade-up">
+            <h1 class="text-center">Kenapa Harus Kami?</h1>
+            <h4 class="text-center">Begini penjelasannya</h4>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="<?= base_url('asset/corporate/foto/1.png') ?>" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h3 class="text-center">Dijamin Super Nikmat!</h3>
+                            <p>Kata siapa makanan sehat itu kurang enak? Yuk cobain menu katering nikmat yang bikin mood naik! Menu katering plant-based Lokatering juga beragam loh, jadi gak bakal bosen deh.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="<?= base_url('asset/corporate/foto/2.png') ?>" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h3 class="text-center">Natural dan Sehat</h3>
+                            <p>Tidak hanya nikmat, makanan Loka juga sehat untuk tubuhmu loh Sob! Loka menggunakan bahan segar berkualitas yang sebanyak mungkin diambil dari petani lokal.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="<?= base_url('asset/corporate/foto/3.png') ?>" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h3 class="text-center">Anti-Ribet!</h3>
+                            <p>Pesan katering sekarang dan tunggu makananmu datang tanpa ribet masak atau scroll hp berjam-jam! Selain jadwal super fleksibel, ada gratis ongkir juga buat kamu yang di Bandung!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <?php if (isset($suggest_makanan)) { ?>
         <!-- ======= Services Section ======= -->
         <section id="services" class="services section-bg">
             <div class="container" data-aos="fade-up">
-                <h1 class="text-center">Menu Makan untuk mencukupi kalori anda</h1>
+                <h1 class="text-center">Menu Makan untuk mencukupi kaloriku</h1>
                 <h4 class="text-center">Butuh <?= $kalori ?> kal</h4>
                 <div class="row">
                     <?php foreach ($suggest_makanan as $key) { ?>

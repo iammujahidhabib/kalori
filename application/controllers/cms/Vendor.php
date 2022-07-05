@@ -16,18 +16,58 @@ class Vendor extends CI_Controller
     }
     public function index()
     {
+        $select="SELECT * FROM jadwal LEFT JOIN customer USING(id_customer) LEFT JOIN menu USING(id_menu) WHERE jadwal.id_vendor=".$this->session->id_vendor." AND jadwal.date_jadwal LIKE '%".date('Y-m-d')."%'";
+        $data['jadwal']=$this->M_template->query($select)->result();
+        $select="SELECT COUNT(*) AS total FROM transaksi LEFT JOIN menu USING(id_menu) WHERE status_transaksi=3 AND menu.id_vendor=".$this->session->id_vendor." AND date LIKE '%".date('Y-m')."%'";
+        $data['total']=$this->M_template->query($select)->row();
+        $select="SELECT menu.id_menu,menu.nama,COUNT(*) AS total FROM transaksi LEFT JOIN menu USING(id_menu) WHERE transaksi.status_transaksi=3 AND menu.id_vendor=".$this->session->id_vendor." AND date LIKE '%".date('Y-m')."%' GROUP BY menu.id_menu";
+        $data['menu']=$this->M_template->query($select)->result();
         // $data['profile'] = $this->M_template->view('profile')->row();
         $this->load->view('admin/header');
-        // $this->load->view('admin/profile/create', $data);
+        $this->load->view('admin/vendor/vendor', $data);
         $this->load->view('admin/footer');
     }
 
-    public function profile()
+    public function akunku()
     {
-        $data['profile'] = $this->M_template->view('profile')->row();
+        $select = "SELECT * FROM vendor left join kota USING(id_kota) WHERE id_vendor = " . $this->session->id_vendor;
+        $data['vendor'] = $this->M_template->query($select)->row();
+        $data['kota'] = $this->M_template->view('kota')->result();
+        $data['akun'] = $this->M_template->view_where('akun', ['id_akun' => $this->session->id_akun])->row();
+        // print_r($data);
         $this->load->view('admin/header');
-        $this->load->view('admin/profile/create', $data);
+        $this->load->view('admin/akun/akunku', $data);
         $this->load->view('admin/footer');
+    }
+    public function update_akunku()
+    {
+        $data = $this->input->post();
+        $this->M_templates->update('akun', ['id_akun' => $this->session->id_akun], $data);
+        redirect('cms/vendor/akunku');
+    }
+    public function update_vendorku()
+    {
+        $data = $this->input->post();
+        if ($_FILES['foto']['name'] != "") {
+            $config = array(
+                'upload_path' => './asset/logo/',
+                'overwrite' => false,
+                'remove_spaces' => true,
+                'allowed_types' => 'png|jpg|gif|jpeg',
+                'max_size' => 10000,
+                'xss_clean' => true,
+            );
+            $this->load->library('upload');
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('foto')) {
+                $file_data = $this->upload->data();
+                $data['foto'] = $file_data['file_name'];
+            } else {
+                echo $this->upload->display_errors();
+            }
+        }
+        $this->M_templates->update('vendor', ['id_vendor' => $this->session->id_vendor], $data);
+        redirect('cms/vendor/akunku');
     }
     public function save($id)
     {
@@ -70,7 +110,8 @@ class Vendor extends CI_Controller
     }
     public function menuku($id)
     {
-        $data['menu'] = $this->M_template->view_where('menu', ['id' => $id])->result();
+        $query = "SELECT * FROM menu left join kategori on menu.id_kategori=kategori.id_kategori left join nutrisi on menu.id_nutrisi=nutrisi.id_nutrisi WHERE id_menu=$id";
+        $data['menu'] = $this->M_template->query($query)->row();
         $this->load->view('admin/header');
         $this->load->view('admin/menu/detail', $data);
         $this->load->view('admin/footer');
@@ -80,7 +121,7 @@ class Vendor extends CI_Controller
         $data['kategori'] = $this->M_template->view('kategori')->result();
         $data['nutrisi'] = $this->M_template->view('nutrisi')->result();
         $this->load->view('admin/header');
-        $this->load->view('admin/menu/create',$data);
+        $this->load->view('admin/menu/create', $data);
         $this->load->view('admin/footer');
     }
     public function edit_menu($id)
@@ -136,13 +177,13 @@ class Vendor extends CI_Controller
                 echo $this->upload->display_errors();
             }
         }
-        $this->M_template->update('menu', ['id' => $id], $data);
+        $this->M_template->update('menu', ['id_menu' => $id], $data);
         // $this->M_template->insert('menu', $data);
-        redirect('cms/admin/menu');
+        redirect('cms/vendor/menu');
     }
     public function delete_menu($id)
     {
-        $this->M_template->delete('menu', ['id' => $id]);
+        $this->M_template->delete('menu', ['id_menu' => $id]);
         redirect('cms/admin/menu');
     }
     // ------------------------------
@@ -167,16 +208,16 @@ class Vendor extends CI_Controller
         $transaksi = $this->M_template->view_where("transaksi", ['id_transaksi' => $id])->row();
         $menu = $this->M_template->view_where("menu", ['id_menu' => $transaksi->id_menu])->row();
         $tanggal_pesan = $transaksi->tanggal_pesan;
-        for ($i=0; $i <$menu->durasi ; $i++) { 
-            $this->M_template->insert("jadwal",[
-                'id_transaksi'=>$transaksi->id_transaksi,
-                'id_menu'=>$transaksi->id_menu,
-                'id_customer'=>$transaksi->id_customer,
-                'id_vendor'=>$menu->id_vendor,
-                'date_jadwal'=>$tanggal_pesan,
-                'status'=>0,
+        for ($i = 0; $i < $menu->durasi; $i++) {
+            $this->M_template->insert("jadwal", [
+                'id_transaksi' => $transaksi->id_transaksi,
+                'id_menu' => $transaksi->id_menu,
+                'id_customer' => $transaksi->id_customer,
+                'id_vendor' => $menu->id_vendor,
+                'date_jadwal' => $tanggal_pesan,
+                'status' => 0,
             ]);
-            $tanggal_pesan = date('Y-m-d',strtotime($tanggal_pesan . "+1 days"));
+            $tanggal_pesan = date('Y-m-d', strtotime($tanggal_pesan . "+1 days"));
         }
         redirect('cms/vendor/transaksi');
     }
@@ -438,5 +479,26 @@ class Vendor extends CI_Controller
         $this->load->view('admin/header');
         $this->load->view('admin/mail/index', $data);
         $this->load->view('admin/footer');
+    }
+    public function jadwal_json($id)
+    {
+        $select = "SELECT *,jadwal.status AS status FROM jadwal LEFT JOIN menu USING(id_menu) WHERE id_transaksi = $id";
+        $data = $this->M_template->query($select)->result();
+        // echo "<pre>";
+        // print_r($data);
+        $html = "";
+        foreach ($data as $key) {
+            $image = "";
+            if ($key->status == 0) {
+                $status = "Belum mengupload makanan diterima";
+            } elseif ($key->status == 1) {
+                $status = "Sudah mengupload makanan diterima";
+            }
+            if ($key->gambar != NULL && $key->status == 1) {
+                $image = "<img class='img-fluid' style='width:200px' src='" . base_url('asset/bukti/' . $key->gambar) . "'>";
+            }
+            $html .= "<tr><td>$key->date_jadwal</td><td>$key->nama</td><td>$image</td><td>$status</td><td>$key->remark</td><tr>";
+        }
+        echo $html;
     }
 }

@@ -23,7 +23,7 @@
 <div class="content mt-3">
     <div class="animated fadeIn">
 
-        <form action="<?= base_url() ?>cms/admin/update_menu/<?= $menu->id_menu ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= base_url() ?>cms/vendor/update_menu/<?= $menu->id_menu ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xs-8 col-sm-8">
                     <div class="card">
@@ -73,7 +73,7 @@
                                     <select name="id_kategori" required class="form-control">
                                         <option disabled value="">Pilih Kategori</option>
                                         <?php foreach ($kategori as $key) { ?>
-                                            <option <?= $menu->id_kategori == $key->id_kategori ? 'selected' : '' ?> value="<? $key->id_kategori ?>"><?= $key->nama_kategori ?></option>
+                                            <option <?= $menu->id_kategori == $key->id_kategori ? 'selected' : '' ?> value="<?=$key->id_kategori ?>"><?= $key->nama_kategori ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -84,7 +84,7 @@
                                     <select name="id_nutrisi" required class="form-control">
                                         <option disabled value="">Pilih Kalori</option>
                                         <?php foreach ($nutrisi as $key) { ?>
-                                            <option <?= $menu->id_nutrisi == $key->id_nutrisi ? 'selected' : '' ?> value="<? $key->id_nutrisi ?>"><?= $key->kalori ?> - <?=$key->batas?></option>
+                                            <option <?= $menu->id_nutrisi == $key->id_nutrisi ? 'selected' : '' ?> value="<?=$key->id_nutrisi ?>"><?= $key->kalori ?> - <?=$key->batas?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -170,5 +170,13 @@
     $(document).ready(function() {
         new FroalaEditor('textarea#inp_visi')
         new FroalaEditor('textarea#inp_deskripsi')
+    })
+</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        new FroalaEditor('textarea#inp_visi')
     })
 </script>

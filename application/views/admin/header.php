@@ -91,14 +91,17 @@
                     </li>
                     <?php }elseif ($this->session->role == 2) {
                     ?>
-                    <li>
-                        <a href="<?= base_url() ?>cms/vendor/menu"> <i class="menu-icon fa fa-dashboard"></i>Menu </a>
+                    <li class="">
+                        <a href="<?= base_url() ?>cms/vendor/"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <li>
-                        <a href="<?= base_url() ?>cms/vendor/transaksi"> <i class="menu-icon fa fa-dashboard"></i>Transaksi </a>
+                        <a href="<?= base_url() ?>cms/vendor/menu"> <i class="menu-icon fa fa-list"></i>Menu </a>
                     </li>
                     <li>
-                        <a href="<?= base_url() ?>cms/vendor/customer"> <i class="menu-icon fa fa-dashboard"></i>Customer </a>
+                        <a href="<?= base_url() ?>cms/vendor/transaksi"> <i class="menu-icon fa fa-shopping-cart"></i>Transaksi </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url() ?>cms/vendor/akunku"> <i class="menu-icon fa fa-user-o"></i>Akunku </a>
                     </li>
                     <?php } 
                     ?>

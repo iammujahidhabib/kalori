@@ -16,24 +16,26 @@
             <div class="col-lg-4 aos-init aos-animate" data-aos="fade-right" data-aos-delay="100">
                 <img src="<?= base_url() ?>asset/logo/<?= $vendor->foto ?>" class="img-fluid" alt="">
             </div>
-            <div class="col-lg-8 pt-4 pt-lg-0 content d-flex flex-column aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-3 pt-4 pt-lg-0 content d-flex flex-column aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
                 <?php if ($this->session->isLogin == true) { ?>
                     <div class="form-group">
-                        <label>Nomor Telpon</label>
-                        <h5><?= $vendor->phone_number ?></h5>
+                        <h6>Nomor Telpon</h6>
+                        <p><?= $vendor->phone_number ?></p>
                     </div>
                 <?php } ?>
                 <div class="form-group">
-                    <label>Deskripsi</label>
-                    <h5><?= $vendor->deskripsi ?></h5>
+                    <h6>Kota</h6>
+                    <p><?= $vendor->nama_kota ?></p>
                 </div>
                 <div class="form-group">
-                    <label>Kota</label>
-                    <h5><?= $vendor->nama_kota ?></h5>
+                    <h6>Alamat</h6>
+                    <p><?= $vendor->alamat ?></p>
                 </div>
+            </div>
+            <div class="col-lg-5 pt-4 pt-lg-0 content d-flex flex-column aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
                 <div class="form-group">
-                    <label>Alamat</label>
-                    <h5><?= $vendor->alamat ?></h5>
+                    <h6>Deskripsi</h6>
+                    <p><?= $vendor->deskripsi ?></p>
                 </div>
             </div>
         </div>
@@ -62,7 +64,7 @@
                 <a href="<?= site_url('menu/detail/' . $key->id_menu) ?>">
                     <div class="col-lg-4 col-md-6 portfolio-item filter-<?= $key->id_kota ?>">
                         <?php if ($key->foto_menu) { ?>
-                            <img src="<?= base_url('asset/logo/' . $key->foto_menu) ?>" class="img-fluid" alt="">
+                            <img src="<?= base_url('asset/corporate/foto/' . $key->foto_menu) ?>" class="img-fluid" alt="">
                         <?php } else { ?>
                             <img src="https://i0.wp.com/f1-styx.imgix.net/article/2021/09/29103622/sepiring-makanan-untuk-diet.jpg?fit=900%2C602&ssl=1" class="img-fluid">
                         <?php } ?> <div class="portfolio-info">
